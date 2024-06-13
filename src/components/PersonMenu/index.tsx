@@ -5,7 +5,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  MenuDivider
+  MenuDivider,
 } from "@chakra-ui/react";
 import { NewPerson } from "../NewPerson";
 import { useDiagram } from "../../lib/useDiagram";
@@ -19,7 +19,7 @@ export function PersonMenu() {
       return !diagramPeople.find((p) => {
         return p.id === id;
       });
-    })
+    }),
   }));
 
   function handleAddPeron(personId: string) {
@@ -33,7 +33,7 @@ export function PersonMenu() {
       {({ onClose }) => (
         <>
           <MenuButton transition="all 0.2s">
-            Add
+            Add Role
             <ChevronDownIcon />
           </MenuButton>
           <MenuList width="10">

@@ -1,23 +1,23 @@
-interface Assignment {
+export interface Assignment {
   diagramId: string;
   personId: string;
   taskId: string;
   value: string[];
 }
 
-interface Task {
+export interface Task {
   name?: string;
   id: string;
 }
 
-interface Diagram {
+export interface Diagram {
   name: string;
   id: string;
   peopleIds: string[];
   tasks: Task[];
 }
 
-interface Person {
+export interface Person {
   name?: string;
   id: string;
 }
@@ -58,3 +58,16 @@ export interface AppState {
     name?: string;
   }) => void;
 }
+
+
+type SelectionPoint = [number, number];
+
+export type SelectionState = {
+  start?: SelectionPoint;
+  end?: SelectionPoint;
+  dragging?: boolean;
+  selectStart: (start: SelectionPoint) => void;
+  selectEnd: (end: SelectionPoint) => void;
+  setDrag: (payload: boolean) => void;
+  resetSelect: () => void;
+};

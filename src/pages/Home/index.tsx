@@ -1,19 +1,16 @@
-import { Box, Button } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { useAppState } from "../../lib/store";
+import { Text } from "@chakra-ui/react";
 
 export function Home() {
-  const diagrams = useAppState(({ diagrams }) => diagrams);
   return (
     <div>
-      <Link to="/new">Create Diagram</Link>
-      {diagrams.map(({ name, id }) => (
-        <Box p="1">
-          <Button width="100%" as={Link} to={`/diagram/${id}`}>
-            {name}
-          </Button>
-        </Box>
-      ))}
+      <Text
+        fontSize="50px"
+        color="ButtonFace"
+        align="center"
+        textShadow="1px 1px 1px ButtonShadow"
+      >
+        Select a diagram or create a new diagram
+      </Text>
     </div>
   );
 }

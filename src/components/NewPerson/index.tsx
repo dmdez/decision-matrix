@@ -13,11 +13,11 @@ export function NewPerson({ onCreate }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<{ name: string }>({
     defaultValues: {
-      name: ""
-    }
+      name: "",
+    },
   });
   const { addPerson, addDiagramPerson } = useAppState();
   const onSubmit = handleSubmit(({ name }) => {
@@ -33,7 +33,7 @@ export function NewPerson({ onCreate }: Props) {
   return (
     <form onSubmit={onSubmit}>
       <InputGroup size="sm">
-        <Input {...register("name")} placeholder="Diagram Name" />
+        <Input {...register("name")} placeholder="Name" />
         {errors?.name && <p>{errors.name.message}</p>}
 
         <Button ml="1" type="submit">

@@ -6,7 +6,7 @@ import {
   IconButton,
   Input,
   useColorModeValue,
-  Box
+  Box,
 } from "@chakra-ui/react";
 import { debounce } from "lodash";
 import { useCallback, useEffect } from "react";
@@ -29,7 +29,7 @@ export function ManageTask({ taskId, defaultValue, diagramId }: Props) {
         updateDiagramTaskName({
           name,
           taskId,
-          diagramId
+          diagramId,
         });
       }
     },
@@ -50,42 +50,62 @@ export function ManageTask({ taskId, defaultValue, diagramId }: Props) {
         defaultValue={defaultValue}
         control={control}
         render={(controlProps) => (
-          <Editable
-            textAlign="center"
-            isPreviewFocusable={true}
-            selectAllOnFocus={false}
-            value={controlProps.field.value}
-          >
-            {({ isEditing, onCancel }) => (
-              <>
-                <Box>
-                  <IconButton
-                    size="xs"
-                    aria-label="Cancel"
-                    icon={<DeleteIcon />}
-                    onClick={onCancel}
+          <>
+            <Editable
+              textAlign="left"
+              isPreviewFocusable={true}
+              selectAllOnFocus={true}
+              value={controlProps.field.value}
+              placeholder="Assign Task..."
+            >
+              {({ isEditing, onCancel }) => (
+                <>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                    }}
+                  >
+                    <IconButton
+                      size="xs"
+                      aria-label="Cancel"
+                      icon={<DeleteIcon />}
+                      onClick={onCancel}
+                    />
+                  </Box>
+
+                  <EditablePreview
+                    noOfLines={3}
+                    minHeight="12"
+                    _placeholder={{
+                      color: "red",
+                    }}
+                    _empty={{
+                      background: "red",
+                    }}
+                    color={
+                      controlProps.field.value
+                        ? "inherit"
+                        : "chakra-placeholder-color"
+                    }
+                    // _hover={{
+                    //   background: hoverBackground,
+                    // }}
                   />
-                </Box>
-                <EditablePreview
-                  noOfLines={3}
-                  minHeight="12"
-                  _hover={{
-                    background: hoverBackground
-                  }}
-                />
-                <Input
-                  as={EditableTextarea}
-                  rows="14"
-                  cols="10"
-                  wrap="soft"
-                  fontSize="10"
-                  height="52px"
-                  p="0"
-                  {...controlProps.field}
-                />
-              </>
-            )}
-          </Editable>
+                  <Input
+                    as={EditableTextarea}
+                    rows={14}
+                    cols={10}
+                    wrap="soft"
+                    height="52px"
+                    p="0"
+                    {...controlProps.field}
+                  />
+                </>
+              )}
+            </Editable>
+          </>
         )}
       />
     </form>

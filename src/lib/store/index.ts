@@ -1,7 +1,7 @@
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { AppState } from "./types";
+import { AppState, SelectionState } from "./types";
 import { genUUID } from "../genUUID";
 import { xor } from "lodash";
 
@@ -129,5 +129,26 @@ export const useAppState = create<AppState>()(
         getStorage: () => sessionStorage // (optional) by default, 'localStorage' is used
       }
     )
+  )
+);
+
+export const useSelectionState = create<SelectionState>()(
+  devtools(
+    immer((set, get) => ({
+      selectStart: (start) => set((state) => {
+        state.start = start;
+        state.end = undefined;
+      }),
+      selectEnd: (end) => set((state) => {
+        state.end = end
+      }),
+      resetSelect: () => set((state) => {
+        state.start = undefined;
+        state.end = undefined;
+      }),
+      setDrag: (payload) => set((state) => {
+        state.dragging = payload;
+      })
+    }))
   )
 );
